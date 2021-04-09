@@ -43,38 +43,38 @@ if module == "moveFile":
         opt_ = GetParams("opt_")
         #source = os.path.normpath(source)
         print('PATH', source)
-    except:
-        PrintException()
 
-    if ext_:
+        if not source.endswith("/"):
+            source = source + "/"
+        if not ext_:
+            ext_ = "*.*"
 
         source = source + ext_
 
-    else:
-        source = source + '/*.*'
+        if opt_:
+            if opt_ == "move_":
+                try:
+                    print(source, dest)
+                    for f in glob.glob(source):
+                        shutil.move(f, dest)
 
-    if opt_:
-        if opt_ == "move_":
-            try:
+                except Exception as e:
+                    PrintException()
+                    raise (e)
 
-                for f in glob.glob(source):
-                    shutil.move(f, dest)
+            if opt_ == "copy_":
+                print('copy')
+                try:
 
-            except Exception as e:
-                PrintException()
-                raise (e)
+                    for f in glob.glob(source):
+                        print('sdasdsa',f)
+                        shutil.copy(f, dest)
 
-        if opt_ == "copy_":
-            print('copy')
-            try:
-
-                for f in glob.glob(source):
-                    print('sdasdsa',f)
-                    shutil.copy(f, dest)
-
-            except Exception as e:
-                PrintException()
-                raise (e)
+                except Exception as e:
+                    PrintException()
+                    raise (e)
+    except:
+        PrintException()
 
 
 if module == "moveFolder":
