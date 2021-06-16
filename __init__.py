@@ -98,18 +98,9 @@ if module == "moveFolder":
 
         if opt_ == "copy_":
             try:
-                for f in files:
-                    path_ = os.path.join(source, f)
-                    if os.path.isdir(path_):
-                        print(path_)
-                        for item in os.listdir(path_):
-                            s = os.path.normpath(os.path.join(path_, item))
-                            d = os.path.normpath(os.path.join(dest, os.path.basename(path_), item))
-                            if os.path.isdir(s):
-                                shutil.copytree(s, d, False, None)
-                            else:
-                                shutil.copy2(s,d)
-                        # shutil.copytree(path_, dest,)
+                d = os.path.normpath(os.path.join(dest, os.path.basename(source)))
+                shutil.copytree(source, d, False, None)
+                
 
             except Exception as e:
                 PrintException()
